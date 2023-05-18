@@ -23,40 +23,52 @@ function saveObjects() {
 }
   
 function login(){
-    var checkEmail = document.getElementById("email").value;
-    var checkPas = document.getElementById("Password1").value;
-    var student={
-        
-    }
-    alert(checkEmail);
-    login1(checkEmail,checkPas);
-}
 
-function login1(email, password) {
+   let eml= newObject.email=document.getElementById("email1").value;
+    let pass= newObject.password=document.getElementById("Password").value;
+let emailPas=studentList.filter(newObject=>newObject.email===eml);
+
+if (emailPas && loggedInUser.password === password) {
+      
+    alert("login successfull")
+  } else {
     
-    // alert(email);
-    // alert(password);
-
-    // let datas=localStorage.students;
-    // alert(datas);
-    // datas.forEach(data => {
-    //     alert(data.email);
-    //     if(data.email===checkEmail)
-    //     {
-    //         alert(data.email);
-    //     }
-    // });
-    let loggedInUser = students.find(data => data.email === email);
-    alert("loggedInUser");
-  
-    if (loggedInUser && loggedInUser.password === password) {
-      
-      alert("login successfull")
-    } else {
-      
-      alert("email or pass not matched")
-    }
+    alert("email or pass not matched")
+  }
+    // var checkEmail = document.getElementById("email").value;
+    // var checkPas = document.getElementById("Password1").value;
+    // var student={
+        
+    // }
+    // alert(checkEmail);
+    // login1(checkEmail,checkPas);
 }
+
+// function login1(email, password) {
+    
+//     // alert(email);
+//     // alert(password);
+
+//     // let datas=localStorage.students;
+//     // alert(datas);
+//     // datas.forEach(data => {
+//     //     alert(data.email);
+//     //     if(data.email===checkEmail)
+//     //     {
+//     //         alert(data.email);
+//     //     }
+//     // });
+//     let loggedInUser = students.find(data => data.email === email);
+//     alert("loggedInUser");
+  
+//     if (loggedInUser && loggedInUser.password === password) {
+      
+//       alert("login successfull")
+//     } else {
+      
+//       alert("email or pass not matched")
+//     }
+// }
 
 $(document).ready(function(){
     $('.btns #btn1').click(function () {
@@ -68,7 +80,9 @@ $(document).ready(function(){
         $('.nav').hide();
     });
 
-    // $('button').click(function(){
-    //     $('.nav').show();
-    // });
+    $('#back').hasClass("reg",function(){
+        $('.nav').show();
+        $('.reg').hide();
+
+    });
 });
