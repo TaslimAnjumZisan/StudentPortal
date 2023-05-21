@@ -132,26 +132,48 @@
         <input type="password" id="adminPassword">
         
         <button onclick="adminLogin()">Login</button>
-      </div>
+    </div>
 
-      <div class="adminSection">
+    <div class="adminSection">
         <h2>Student Data</h2>
         <table id="studentTable">
-          <thead >
-            <tr>
-              <th>Name</th>
-              <th>Roll</th>
-              <th>Department</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Table rows will be dynamically populated with student data -->
-          </tbody>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Department</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="studentData">
+      
+        </tbody>
         </table>
-      </div>
+    </div>
+
+
+
+    <div class="adminStdUpdate">
+        
+        <form id="studentUpdateForm">
+          <br><label for="name">Name:</label>
+          <input type="text" value="" id="name3"><br><br>
+          
+          <label for="roll">Roll:</label>
+          <input type="text" id="roll3"><br><br>
+          
+          <label for="dept">Department:</label>
+          <input type="text" id="dept3"><br><br>
+          
+          <label for="phn">Phone:</label>
+          <input type="text" id="phn3"><br><br>
+          
+        
+        </form>
+        <button id="updateButton2" type="button">Update</button>
+        <!-- <button id="back4" type="button">Back</button> -->
+    </div>
       
 
       

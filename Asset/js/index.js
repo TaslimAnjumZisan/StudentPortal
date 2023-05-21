@@ -45,7 +45,7 @@ function login(){
                 if(event.target.id=='updateButton')
                 {
                     var updatedName = document.getElementById("name2").value;
-                     var updatedRoll = document.getElementById("roll2").value;
+                    var updatedRoll = document.getElementById("roll2").value;
                     var updatedDept = document.getElementById("dept2").value;
                     var updatedPhn = document.getElementById("phn2").value;
 
@@ -58,7 +58,7 @@ function login(){
             });
 
     } else {
-      alert("email or pass not matched")
+      alert("email or pass not matched");
     }   
 }
 
@@ -92,9 +92,10 @@ $(document).ready(function(){
             $('.nav').hide();
 
         }
-        if(event.target.id=="updateStudent")
+        if(event.target.id=="adminUpdate")
         {
-           
+          $('.adminStdUpdate').show();
+          $('.adminSection').hide();
 
         }
 
@@ -102,85 +103,152 @@ $(document).ready(function(){
 });
 
 
-function adminLogin() {
-    let adminEmail = document.getElementById("adminEmail").value;
-    let adminPassword = document.getElementById("adminPassword").value;
+function adminLogin(){
+  let adminEmail = document.getElementById("adminEmail").value;
+  let adminPassword = document.getElementById("adminPassword").value;
   
-    if (adminEmail === "admin@example.com" && adminPassword === "111") {
-      console.log("Admin login successful!");
+  if (adminEmail === "admin@example.com" && adminPassword === "111") {
+  console.log("Admin login successful!");
   
       
-      $('.adminSection').show();
-      $('.adminLogin').hide();
+    $('.adminSection').show();
+    $('.adminLogin').hide();
 
-      displayStudentData();
-    } else {
-      alert("Admin email or password is incorrect");
-    }
-  };
-
-
-  function displayStudentData() {
-    var table = document.getElementById("studentTable");
-  
-    // Clear the table body
-    var tbody = table.getElementsByTagName("tbody")[0];
-    tbody.innerHTML = "";
-  
-    // Populate the table with student data
-    for (var i = 0; i < studentList.length; i++) {
-      var student = studentList[i];
-  
-      var row = tbody.insertRow(i);
-      row.insertCell(0).textContent = student.name;
-      row.insertCell(1).textContent = student.roll;
-      row.insertCell(2).textContent = student.department;
-      row.insertCell(3).textContent = student.phone;
-      row.insertCell(4).textContent = student.email;
-  
-      var actionsCell = row.insertCell(5);
-      actionsCell.innerHTML = '<button onclick="updateStudent(' + i + ')">Update</button> <button onclick="deleteStudent(' + i + ')">Delete</button>';
-    }
+    displayStudentData();
+  } else {
+    alert("Admin email or password is incorrect");
   }
+};
 
-  function updateStudent(index) {
-    var student = studentList[index];
+ 
+
+
+function displayStudentData() {
+    var studentData=document.getElementById("studentData");
+    console.log(studentList);
+    studentList.forEach(function(student) {
+      var row = document.createElement("tr");
+      console.log(row);
+      
+      var nameCell = document.createElement("td");
+      nameCell.textContent = student.name;
+      row.appendChild(nameCell);
+
+      var rollCell = document.createElement("td");
+      rollCell.textContent = student.roll;
+      row.appendChild(rollCell);
+
+      var deptCell = document.createElement("td");
+      deptCell.textContent = student.department;
+      row.appendChild(deptCell);
+
+      var phoneCell = document.createElement("td");
+      phoneCell.textContent = student.phone;
+      row.appendChild(phoneCell);
+
+      studentData.appendChild(row);
+
+      var actionsCell = document.createElement("td");
+
+      var updateButton = document.createElement("button");
+      updateButton.textContent = "Update";
+      
+      updateButton.addEventListener("click", function(event) {
+      
+        updateStudentData($(this).closest('tr').index());
+        
+        // var na=studentList[$(this).closest('tr').index()].name;
+        // console.log(na);
+      });
+      actionsCell.appendChild(updateButton);
+
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.addEventListener("click", function(event) {
+        var row = this.closest('tr');
+        var rowIndex = Array.prototype.indexOf.call(row.parentNode.children, row);
+        deleteStudentData(rowIndex);
+        row.remove(); 
+      });
+      
+      actionsCell.appendChild(deleteButton);
+
+      row.appendChild(actionsCell);
+
+      
+      studentData.appendChild(row);
+   });
+ }
+
+    // Update student data function
+function updateStudentData(index) {
   
-    // Get the modal element
-    var modal = document.getElementById("updateModal");
-  
-    // Get the form and its elements
-    var form = modal.querySelector("form");
-    var nameInput = form.querySelector("#updateName");
-    var rollInput = form.querySelector("#updateRoll");
-    var departmentInput = form.querySelector("#updateDept");
-    var phoneInput = form.querySelector("#updatePhn");
-  
-    // Pre-fill the form with the current student data
-    nameInput.value = student.name;
-    rollInput.value = student.roll;
-    departmentInput.value = student.department;
-    phoneInput.value = student.phone;
-  
-    // Show the modal
-    modal.style.display = "block";
-  
-    // Handle form submission
-    form.onsubmit = function(e) {
-      e.preventDefault(); // Prevent form submission
-  
-      // Update the student object
-      student.name = nameInput.value;
-      student.roll = rollInput.value;
-      student.department = departmentInput.value;
-      student.phone = phoneInput.value;
-  
-      // Close the modal
-      modal.style.display = "none";
-  
-      // Refresh the table
-      displayStudentData();
-    };
+  console.log("Update student at index", index);
+
+  var updatedName = studentList[index].name;
+   var updatedRoll = studentList[index].roll;
+  var updatedDept = studentList[index].department;
+  var updatedPhn = studentList[index].phone;
+  console.log(updatedName);
+  console.log(updatedRoll);
+  console.log(updatedDept);
+  console.log(updatedPhn);
+
+  document.getElementById("name3").value = updatedName;
+  document.getElementById("roll3").value = updatedRoll;
+  document.getElementById("dept3").value = updatedDept;
+  document.getElementById("phn3").value = updatedPhn;
+
+  $('.adminStdUpdate').show();
+  $('.adminSection').hide();
+
+  $('Button').click(function (event) 
+    {
+      if(event.target.id=='updateButton2')
+      {
+        var updatedName1 = document.getElementById("name3").value;
+        console.log(updatedName1);
+        var updatedRoll1 = document.getElementById("roll3").value;
+       var updatedDept1 = document.getElementById("dept3").value;
+       var updatedPhn1 = document.getElementById("phn3").value;
+
+       updatedName = updatedName1;
+       studentList[index].name = updatedName1;
+       studentList[index].roll = updatedRoll1;
+       studentList[index].department = updatedDept1;
+       studentList[index].phone = updatedPhn1;
+       console.log(studentList);
+
+
+                    // var updatedName = document.getElementById("name2").value;
+                    // var updatedRoll = document.getElementById("roll2").value;
+                    // var updatedDept = document.getElementById("dept2").value;
+                    // var updatedPhn = document.getElementById("phn2").value;
+
+                    // loggedInStudent.name = updatedName;
+                    // loggedInStudent.roll = updatedRoll;
+                    // loggedInStudent.department = updatedDept;
+                    // loggedInStudent.phone = updatedPhn;
+        $('.adminSection').show();
+        alert("Student data updated");
+        $('.adminStdUpdate').hide();
+        displayStudentData();
+      }
+    });
+
+          
+
+        
+
 }
-  
+
+    // Delete student data function
+function deleteStudentData(index) {
+ 
+     
+}
+
+
+
+
   
