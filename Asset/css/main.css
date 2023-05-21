@@ -1,7 +1,16 @@
+
+.reg{
+    display: none;
+    
+}
+
 .login{
     display: none;
 }
+.logInSucces{
+    display: none;
+}
 
-.reg{
+.adminLogin{
     display: none;
 }
